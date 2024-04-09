@@ -131,7 +131,7 @@ sudo chown -R 1000:1000 ~/ncn
 ### 14. Run Your Docker Container
 Execute the Docker command to start your worker container.
 ```bash
-docker run --privileged --env SIGNATURE="Your_neurochain_ai_worker_key" -v /home/<your_user_name>/ncn:/worker-home/models -d nc-uat-registry.neurochain.io/ncllmworker:v0.3.1.linux
+docker run --privileged --env SIGNATURE="Your_neurochain_ai_worker_key" -v /home/<your_user_name>/ncn:/worker-home/models -d nc-uat-registry.neurochain.io/ncllmworker:v0.3.3.linux
 ```
 Replace `<your_user_name>` with your actual username and `"Your_neurochain_ai_worker_key"` with your actual worker key.
 
