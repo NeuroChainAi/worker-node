@@ -78,75 +78,21 @@ source ~/.bashrc
 ### 8. Reboot and Verify GPU Information
 Reboot your system and then verify that your GPU is recognized by running `nvidia-smi`.
 
-### Docker Installation and Configuration
+## Running model
 
-### 9. Install Docker
-Follow the official Docker installation instructions for Ubuntu:
-[Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+### 1. Download recent model, extract and open directory in terminal 
 
-### 10. Add User to Docker Group
-Ensure your user can execute Docker commands without sudo.
+execute: 
 ```bash
-sudo groupadd docker
-sudo usermod -aG docker $USER
+export SIGNATURE=<YOUR_SIGNATURE>
 ```
-- Optional: Install Docker Compose.
+
+and run the model:
+
 ```bash
-sudo apt-get install docker-compose
+./server
 ```
 
-### 11. Install NVIDIA Container Toolkit
-Follow the installation guide to enable NVIDIA GPU support in Docker containers:
-[Installing NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
-
-### 12. Configure Docker Daemon
-Configure Docker to use the NVIDIA runtime by default.
-- Edit `daemon.json`:
-```bash
-sudo nano /etc/docker/daemon.json
-```
-- Ensure the file includes the following:
-```json
-{
-    "runtimes": {
-        "nvidia": {
-            "path": "nvidia-container-runtime",
-            "args": []
-        }
-    },
-    "default-runtime": "nvidia",
-    "storage-driver": "overlay2"
-}
-```
-
-### Final Steps: Deploying Your Docker Container
-
-### 13. Prepare Worker Model Repository
-Create a directory for your Neurochain worker model repository.
-```bash
-mkdir ~/ncn
-sudo chown -R 1000:1000 ~/ncn
-```
-
-### 14. Run Your Docker Container
-Execute the Docker command to start your worker container.
-```bash
-docker run --privileged --env SIGNATURE="Your_neurochain_ai_worker_key" -v /home/<your_user_name>/ncn:/worker-home/models -d nc-uat-registry.neurochain.io/ncllmworker:v0.3.3.linux
-```
-Replace `<your_user_name>` with your actual username and `"Your_neurochain_ai_worker_key"` with your actual worker key.
-
-### 15. Verify Worker Connection
-You can check if your worker has successfully connected to the network.
-
-- List running Docker containers:
-```bash
-docker ps
-```
-
-- Look for your worker container's name. Assuming the container name is `intelligent_mirzakhani`, you can follow its logs:
-```bash
-docker logs -f intelligent_mirzakhani
-```
 
 You should see output similar to this in the terminal, indicating the worker's initialization and configuration:
 ```
